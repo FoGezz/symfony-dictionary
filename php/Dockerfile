@@ -1,7 +1,7 @@
 FROM php:8.1-fpm
 
 RUN apt update \
-    && apt install -y zlib1g-dev g++ libicu-dev zip libzip-dev libpq-dev \
+    && apt install -y zlib1g-dev g++ libicu-dev zip libzip-dev libpq-dev nodejs npm \
     && docker-php-ext-install intl opcache pdo pdo_mysql pdo_pgsql \
     && pecl install apcu \
     && docker-php-ext-enable apcu \
@@ -11,6 +11,8 @@ RUN apt update \
 WORKDIR /var/www/symfony_docker
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+RUN npm install
 
 RUN echo "deb [trusted=yes] https://repo.symfony.com/apt/ /" | tee /etc/apt/sources.list.d/symfony-cli.list \
     && apt update -y \

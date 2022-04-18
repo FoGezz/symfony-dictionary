@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Definition index{% endblock %}
+
+{% block body %}
+    <h1>Definition index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Value</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for definition in definitions %}
+            <tr>
+                <td>{{ definition.id }}</td>
+                <td>{{ definition.value }}</td>
+                <td>
+                    <a href="{{ path('app_definition_show', {'id': definition.id}) }}">show</a>
+                    <a href="{{ path('app_definition_edit', {'id': definition.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_definition_new') }}">Create new</a>
+{% endblock %}

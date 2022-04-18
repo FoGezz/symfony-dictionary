@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ term.value }}{% endblock %}
+
+{% block body %}
+    <h1>{{ term.value }}</h1>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Термин</th>
+            <td>{{ term.value }}</td>
+        </tr>
+        {% for definition in definitions %}
+            <tr>
+                <th>Значение</th>
+                <td>{{ definition.value }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_term_index') }}">В словарь</a>
+
+    <a href="{{ path('app_term_edit', {'id': term.id}) }}">Редактировать</a>
+
+    <a href="{{ path('app_definition_new') }}">Создать значение</a>
+
+    {{ include('term/_delete_form.html.twig') }}
+{% endblock %}
